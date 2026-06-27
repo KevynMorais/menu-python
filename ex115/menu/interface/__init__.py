@@ -1,31 +1,33 @@
-def menu(msg):
+def linha(tam=42):
+    return '-'*tam
+
+
+def cabeçalho(msg):
+    print(linha())
+    print(msg.center(42))
+    print(linha())
+
+
+def leiaInt(msg):
     while True:
-        mensagem('MENU PRINCIPAL')
-        print('1 - Ver pessoas cadastradas.')
-        print('2 - Cadastrar nova Pessoa.')
-        print('3 - Sair do sistema')
         try:
-            o = int(input(msg))
+            valor = int(input(msg))
+        except KeyboardInterrupt:
+            print('\n\033[0;33mO usuário preferiu não informar o número inteiro.\033[m')
+            return 0
         except (ValueError, TypeError):
             print('\033[0;31mERRO! Por favor, digite um número inteiro válido.\033[m')
-        except KeyboardInterrupt:
-            print('\n\033[0;33mVocê deixou o programa.\033[m')
-            break
+            continue
         else:
-            if o == 1:
-                mensagem('Opção 1')
-                continue
-            elif o == 2:
-                mensagem('Opção 2')
-                continue
-            elif o == 3:
-                mensagem('Saindo do sistema... Até logo!')
-                break
-            else:
-                print('\033[0;31mERRO! Digite uma opção válida.\033[m')
+            return valor
 
-def mensagem(msg):
-    tam = len(msg) + 20
-    print('-' * tam)
-    print(msg.center(tam))
-    print('-' * tam)
+
+def menu(lista):
+    cabeçalho('MENU PRINCIPAL')
+    c = 1
+    for item in lista:
+        print(f'\033[33m{c}\033[m - \033[34m{item}\033[m')
+        c += 1
+    print(linha())
+    opc = leiaInt('\033[33mSua opção: \033[m')
+    return opc
