@@ -1,9 +1,17 @@
 from ex115.menu.interface import *
+from ex115.menu.arquivo import *
+from time import sleep
+
+arq = 'cursoemvideo.txt'
+
+if not arquivoExiste(arq):
+    criarArquivo(arq)
 
 while True:
     resposta = menu(['Ver pessoas cadastradas', 'Cadastrar nova pessoa', 'Sair do sistema'])
     if resposta == 1:
-        cabeçalho('Opção 1')
+        # Opção de listar um conteúdo de um arquivo
+        lerArquivo(arq)
     elif resposta == 2:
         cabeçalho('Opção 2')
     elif resposta == 3:
@@ -11,3 +19,4 @@ while True:
         break
     else:
         print('\033[31mERRO! Digite uma opção válida.\033[m')
+    sleep(1)
